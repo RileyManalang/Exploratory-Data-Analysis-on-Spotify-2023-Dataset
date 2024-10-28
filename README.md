@@ -1,6 +1,4 @@
 # Spotify Songs Analysis 2023
-An exploratory data analysis of the most streamed Spotify songs in 2023.
-
 ## 📋 Project Description
 This project performs an exploratory data analysis on Spotify's most streamed songs in 2023. 
 
