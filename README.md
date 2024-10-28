@@ -22,5 +22,9 @@ This project performs an exploratory data analysis on Spotify's most streamed so
 
 
 
-## Versions
-### 
+#### Version History:
+##### [v1.1.0] - 10/28/2024
+###### Changes:
+##### [v1.2.0] - 9/21/2024
+
+-
