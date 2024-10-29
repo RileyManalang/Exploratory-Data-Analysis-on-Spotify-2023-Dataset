@@ -64,7 +64,7 @@ print(top_5_streams)
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
-                - Added a code that will show me the data types of each column, number of rows and columns, missing values, and top 5 most streamed songs
+- Added a code that will show me the data types of each column, number of rows and columns, missing values, and top 5 most streamed songs
 ##### [v1.2.0] - 9/21/2024
 
 -
