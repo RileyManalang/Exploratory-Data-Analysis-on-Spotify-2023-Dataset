@@ -19,56 +19,40 @@ import numpy as np
 # Read the dataset
 df = pd.read_csv('spotify-2023.csv')
 
-# Basic information about the dataset
-print("=== Dataset Info ===")
+# Let's first look at problematic rows in the streams column
+print("=== Problematic Values in Streams Column ===")
+# Print rows where streams contains non-numeric characters (after removing commas)
+problematic_streams = df[~df['streams'].str.replace(',', '').str.match(r'^\d+$')]
+print("\nRows with non-numeric streams values:")
+print(problematic_streams[['track_name', 'artist(s)_name', 'streams']])
+
+# Now let's clean the streams column properly
+def clean_streams(value):
+    try:
+        # Remove commas and convert to numeric
+        return pd.to_numeric(str(value).replace(',', ''))
+    except:
+        # If conversion fails, return NaN
+        return np.nan
+
+# Clean the streams column
+df['streams'] = df['streams'].apply(clean_streams)
+
+# Print basic info about the cleaned dataset
+print("\n=== Dataset Info After Cleaning ===")
 print(df.info())
 
 print("\n=== Missing Values ===")
 missing_values = df.isnull().sum()
 print(missing_values[missing_values > 0])
 
-print("\n=== Basic Statistics ===")
-print(df.describe())
+print("\n=== Streams Statistics ===")
+print(df['streams'].describe())
 
-# Check for potential data quality issues
-print("\n=== Data Quality Checks ===")
-
-#Check for duplicate tracks
-duplicates = df[df.duplicated(['track_name', 'artist_name'], keep=False)]
-print(f"\nNumber of duplicate tracks: {len(duplicates)}")
-
-#Check for invalid percentages
-percentage_columns = [col for col in df.columns if '%' in col]
-invalid_percentages = {}
-for col in percentage_columns:
-    invalid = df[(df[col] < 0) | (df[col] > 100)][col]
-    if len(invalid) > 0:
-        invalid_percentages[col] = len(invalid)
-
-print("\nColumns with invalid percentages (should be 0-100):")
-print(invalid_percentages)
-
-#Check for invalid streams (negative values)
-invalid_streams = df[df['streams'] < 0]
-print(f"\nTracks with negative streams: {len(invalid_streams)}")
-
-#Check data types consistency
-print("\n=== Data Types ===")
-print(df.dtypes)
-
-#Check for suspicious values in key column
-valid_keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-invalid_keys = df[~df['key'].isin(valid_keys)]
-print(f"\nTracks with invalid keys: {len(invalid_keys)}")
-
-#Check release dates
-df['released_date'] = pd.to_datetime(df['released_date'], errors='coerce')
-invalid_dates = df[df['released_date'].isnull()]
-print(f"\nTracks with invalid release dates: {len(invalid_dates)}")
-
-# Print sample of the data
-print("\n=== Sample of the Data ===")
-print(df.head())
+# Show top 5 most streamed songs
+print("\n=== Top 5 Most Streamed Songs ===")
+top_5_streams = df.nlargest(5, 'streams')[['track_name', 'artist(s)_name', 'streams']]
+print(top_5_streams)
 ```
 
 
@@ -80,6 +64,7 @@ print(df.head())
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
+                - Added a code that will show me the data types of each column, number of rows and columns, missing values, and top 5 most streamed songs
 ##### [v1.2.0] - 9/21/2024
 
 -
