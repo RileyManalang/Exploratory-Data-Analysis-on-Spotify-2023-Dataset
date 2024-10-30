@@ -86,16 +86,24 @@ print(missing_values[missing_values > 0])
 ```
 ## Basic Descriptive Statistics
 - The mean, median, and standard deviation of the streams column are as follows
--- Mean - 5.141374
+> Mean - 5.141374
+> 
 > Median - 2.905309
+> 
 > Standard Deviation - 5.668569
+
 - Distribution of released_year
 > The majority of the songs are from the recent years
+
 > Notable outliers are songs that were in the 1930s - 1960s
+
 > The distribution shows that Spotify’s most streamed songs are predominantly modern
+
 - Distribution of artist_count
 > Most songs have a solo or duet
+
 > Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
+
 > Collaborations with 3 artists are rare.
 
 
