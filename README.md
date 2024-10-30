@@ -105,6 +105,7 @@ print(missing_values[missing_values > 0])
 > Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
 
 > Collaborations with 3 artists are rare.
+![image](https://github.com/user-attachments/assets/6104e6c1-ca7a-4760-a52a-84259f2a39bb)
 
 
 
