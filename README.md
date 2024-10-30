@@ -9,6 +9,16 @@ This project performs an exploratory data analysis on Spotify's most streamed so
 - Analysis of temporal trends
 - Platform comparison (Spotify vs. Apple Music playlists)
 
+## Libraries that were used
+```
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from datetime import datetime
+from typing import List, Tuple, Dict, Optional
+
+```
 #### Exploring the Data
 - In the first part of this project is getting a dataset overview. So, I created a piece of code to help me check missing values and any abnormalities within the dataset.
 - After running the code, I then discovered that there were a few missing values within the 'shazam' column and 'key' column
@@ -57,10 +67,22 @@ print(top_5_streams)
 ```
 
 ## Overview of the Dataset
+- There are 953 rows and 24 columns
+- Below are the data types of each column and also the missing values
+![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
+![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
 
-![image](https://github.com/user-attachments/assets/41470c97-cb82-453a-ace2-76ccbff682b8)
+### This is the piece of code that produced these outputs
+```
+# Print basic info about the cleaned dataset
+print("\n=== Dataset Info After Cleaning ===")
+print(df.info())
 
+print("\n=== Missing Values ===")
+missing_values = df.isnull().sum()
+print(missing_values[missing_values > 0])
 
+```
 
 
 #### Version History:
