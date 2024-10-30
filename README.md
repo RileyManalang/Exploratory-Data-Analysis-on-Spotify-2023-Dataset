@@ -9,9 +9,10 @@ This project performs an exploratory data analysis on Spotify's most streamed so
 - Analysis of temporal trends
 - Platform comparison (Spotify vs. Apple Music playlists)
 
-## Exploring the Data
-- In the first part of this project is getting a dataset overview. So, I created a code to help me check missing values and any abnormalities within the dataset.
+#### Exploring the Data
+- In the first part of this project is getting a dataset overview. So, I created a piece of code to help me check missing values and any abnormalities within the dataset.
 - After running the code, I then discovered that there were a few missing values within the 'shazam' column and 'key' column
+- This piece of code also returns basic descriptive statistics of the 'streams' column such as the mean, median (50th Percentile), and standard deviation.
 ```
 import pandas as pd
 import numpy as np
@@ -55,8 +56,9 @@ top_5_streams = df.nlargest(5, 'streams')[['track_name', 'artist(s)_name', 'stre
 print(top_5_streams)
 ```
 
+## Overview of the Dataset
 
-
+![image](https://github.com/user-attachments/assets/41470c97-cb82-453a-ace2-76ccbff682b8)
 
 
 
