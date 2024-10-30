@@ -68,7 +68,8 @@ print(top_5_streams)
 
 ## Overview of the Dataset
 - There are 953 rows and 24 columns
-- Below are the data types of each column and also the missing values
+- Below are the data types of each column
+- The missing values are were also indicated which can be read for the streams column, there is a 1 missing entry or rather an abnormal entry and for the shazam_charts column there are 50 missing values. 
 ![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
 ![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
 
@@ -83,6 +84,20 @@ missing_values = df.isnull().sum()
 print(missing_values[missing_values > 0])
 
 ```
+## Basic Descriptive Statistics
+- The mean, median, and standard deviation of the streams column are as follows
+> Mean - 5.141374
+> Median - 2.905309
+> Standard Deviation - 5.668569
+- Distribution of released_year
+> The majority of the songs are from the recent years
+> Notable outliers are songs that were in the 1930s - 1960s
+> The distribution shows that Spotify’s most streamed songs are predominantly modern
+- Distribution of artist_count
+> Most songs have a solo or duet
+> Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
+> Collaborations with 3 artists are rare.
+
 
 
 #### Version History:
