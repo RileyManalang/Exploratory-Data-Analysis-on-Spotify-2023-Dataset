@@ -86,7 +86,7 @@ print(missing_values[missing_values > 0])
 ```
 ## Basic Descriptive Statistics
 - The mean, median, and standard deviation of the streams column are as follows
-> Mean - 5.141374
+-- Mean - 5.141374
 > Median - 2.905309
 > Standard Deviation - 5.668569
 - Distribution of released_year
