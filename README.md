@@ -1,4 +1,4 @@
-# Spotify Songs Analysis 2023
+![image](https://github.com/user-attachments/assets/ecfaf248-7112-443c-93d5-2a6e88d31165)# Spotify Songs Analysis 2023
 ## 📋 Project Description
 This project performs an exploratory data analysis on Spotify's most streamed songs in 2023. 
 
@@ -168,6 +168,22 @@ top_artists_by_tracks = data['artist(s)_name'].value_counts().head(5)
 print("Top 5 Artists by Track Count:")
 print(top_artists_by_tracks)
 ```
+
+## Temporal Trends
+- There's a dramatic increase in the number of tracks released in recent years
+- The peak appears to be around 2023 with approximately 400 tracks
+- Prior to 2010, there were very few tracks in the dataset
+- There's an exponential growth pattern from roughly 2015 onwards
+
+- There's significant variation in releases across months
+- Peak releases occur in Month 1 (January) and Month 5 (May), both with around 130-140 tracks
+- The lowest number of releases appears to be in Month 8 (August) with about 45 tracks
+- There seems to be a cyclical pattern with higher releases in the beginning and middle of the year
+![image](https://github.com/user-attachments/assets/362e9274-6247-4f15-a3ce-0ee23f9fbbe3)
+![image](https://github.com/user-attachments/assets/1a11e714-0128-478c-9e0e-4460f7d65d0e)
+
+
+
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
