@@ -1,6 +1,6 @@
 # Spotify Songs Analysis 2023
 ## 📋 Project Description
-This project performs an exploratory data analysis on Spotify's most streamed songs in 2023. 
+This is an exploratory data analysis project on Spotify's most streamed songs in 2023. 
 
 ## 🎯 Key Features
 - Comprehensive data cleaning and preprocessing
