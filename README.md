@@ -109,8 +109,65 @@ print(missing_values[missing_values > 0])
 
 ![image](https://github.com/user-attachments/assets/6104e6c1-ca7a-4760-a52a-84259f2a39bb)
 
+- This is the piece of code that showed these graphs
+```
+# Set up the plotting style
+plt.style.use('seaborn-v0_8-bright')
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
 
+# Distribution of released_year
+sns.histplot(data=df, x='released_year', bins=30, ax=ax1)
+ax1.set_title('Distribution of Release Years')
+ax1.set_xlabel('Release Year')
+ax1.set_ylabel('Number of Songs')
 
+# Add vertical line for median year
+median_year = df['released_year'].median()
+ax1.axvline(x=median_year, color='red', linestyle='--', label=f'Median Year: {median_year:.0f}')
+ax1.legend()
+
+#Box plot for released_year to show outliers
+sns.boxplot(data=df, y='released_year', ax=ax2)
+ax2.set_title('Box Plot of Release Years')
+ax2.set_ylabel('Release Year')
+
+# Distribution of artist_count
+sns.histplot(data=df, x='artist_count', bins=range(1, df['artist_count'].max() + 2), ax=ax3)
+ax3.set_title('Distribution of Artist Count')
+ax3.set_xlabel('Number of Artists')
+ax3.set_ylabel('Number of Songs')
+
+# Box plot for artist_count to show outliers
+sns.boxplot(data=df, y='artist_count', ax=ax4)
+ax4.set_title('Box Plot of Artist Count')
+ax4.set_ylabel('Number of Artists')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Top Performers
+- This snapshot shows the top 5 most streamed tracks
+![image](https://github.com/user-attachments/assets/de094956-5f69-4c8a-ae81-2cce68db1f49)
+
+- This is the top 5 most frequent artists based on the number of tracks in the dataset
+![image](https://github.com/user-attachments/assets/b93b4495-190f-486e-8104-32370ff1ab2e)
+
+- This is the piece of code that produced these outputs
+```
+# Show top 5 most streamed songs
+print("\n=== Top 5 Most Streamed Songs ===")
+top_5_streams = df.nlargest(5, 'streams')[['track_name', 'artist(s)_name', 'streams']]
+print(top_5_streams)
+```
+```
+# Count the occurrences of each artist and get the top 5
+top_artists_by_tracks = data['artist(s)_name'].value_counts().head(5)
+
+# Display the result
+print("Top 5 Artists by Track Count:")
+print(top_artists_by_tracks)
+```
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
