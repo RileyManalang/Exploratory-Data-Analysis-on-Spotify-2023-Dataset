@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/ecfaf248-7112-443c-93d5-2a6e88d31165)# Spotify Songs Analysis 2023
+# Spotify Songs Analysis 2023
 ## 📋 Project Description
 This project performs an exploratory data analysis on Spotify's most streamed songs in 2023. 
 
