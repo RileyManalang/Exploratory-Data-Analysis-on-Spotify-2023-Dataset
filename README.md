@@ -209,6 +209,17 @@ print(top_artists_by_tracks)
         plt.show()
 ```
 
+## Genere and Music Characteristics
+- Overall Correlation Pattern:
+    - All attributes show relatively weak negative correlations with streams (all bars point downward)
+    - The correlations range from nearly 0 to approximately -0.11
+
+- Strongest Correlations
+    - Speechiness_% has the strongest negative correlation (around -0.11)
+    - Danceability_% has the second strongest negative correlation (around -0.10)
+    - The remaining attributes (liveness_%, instrumentalness_%, valence_%, energy_%, acousticness_%, and bpm) have weaker negative correlations
+
+
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
