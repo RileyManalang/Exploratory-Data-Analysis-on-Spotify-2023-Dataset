@@ -181,8 +181,33 @@ print(top_artists_by_tracks)
 - There seems to be a cyclical pattern with higher releases in the beginning and middle of the year
 ![image](https://github.com/user-attachments/assets/362e9274-6247-4f15-a3ce-0ee23f9fbbe3)
 ![image](https://github.com/user-attachments/assets/1a11e714-0128-478c-9e0e-4460f7d65d0e)
-
-
+- This is the piece of code that managed to produce these graphs
+```
+   def plot_temporal_trends(self, save_path: str = None):
+        """Plot yearly and monthly release trends."""
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(15, 12))
+        
+        # Yearly trends
+        year_counts = self.df['released_year'].value_counts().sort_index()
+        year_counts.plot(kind='bar', ax=ax1)
+        ax1.set_title('Number of Tracks Released per Year')
+        ax1.set_xlabel('Year')
+        ax1.set_ylabel('Number of Tracks')
+        ax1.tick_params(axis='x', rotation=45)
+        
+        # Monthly trends
+        month_counts = self.df['released_month'].value_counts().sort_index()
+        month_counts.plot(kind='bar', ax=ax2)
+        ax2.set_title('Number of Tracks Released per Month')
+        ax2.set_xlabel('Month')
+        ax2.set_ylabel('Number of Tracks')
+        ax2.tick_params(axis='x', rotation=45)
+        
+        plt.tight_layout()
+        if save_path:
+            plt.savefig(save_path)
+        plt.show()
+```
 
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
