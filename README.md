@@ -86,25 +86,19 @@ print(missing_values[missing_values > 0])
 ```
 ## Basic Descriptive Statistics
 - The mean, median, and standard deviation of the streams column are as follows
-> Mean - 5.141374
-> 
-> Median - 2.905309
-> 
-> Standard Deviation - 5.668569
+    - Mean - 5.141374
+    - Median - 2.905309
+    - Standard Deviation - 5.668569
 
 - Distribution of released_year
-> The majority of the songs are from the recent years
-
-> Notable outliers are songs that were in the 1930s - 1960s
-
-> The distribution shows that Spotify’s most streamed songs are predominantly modern
+    - The majority of the songs are from the recent years
+    - Notable outliers are songs that were in the 1930s - 1960s
+    - The distribution shows that Spotify’s most streamed songs are predominantly modern
 
 - Distribution of artist_count
-> Most songs have a solo or duet
-
-> Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
-
-> Collaborations with 3 artists are rare.
+    - Most songs have a solo or duet
+    - Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
+    - Collaborations with 3 artists are rare.
 
 
 ![image](https://github.com/user-attachments/assets/6104e6c1-ca7a-4760-a52a-84259f2a39bb)
@@ -219,7 +213,31 @@ print(top_artists_by_tracks)
     - Danceability_% has the second strongest negative correlation (around -0.10)
     - The remaining attributes (liveness_%, instrumentalness_%, valence_%, energy_%, acousticness_%, and bpm) have weaker negative correlations
 
+- Scatter Plot Analysis:
+    - None show a strong linear relationship with streams
+    - All display considerable scatter/dispersion
+    - The highest streaming numbers appear across various values of these attributes, suggesting no single "optimal" value
 
+- Correlation between danceability_% & energy_% and valence_% and acousticness_%
+    - Danceability and Energy show a weak positive correlation (0.2)
+    - Valence and acousticness show a weak negative correlation (-0.082)
+![image](https://github.com/user-attachments/assets/1be948d8-9de2-48fd-896d-a218ed54b29e)
+
+![image](https://github.com/user-attachments/assets/5bcce955-2511-473b-8176-1eb110cd6b52)
+
+## Platform Popularity
+- Platform Reach (means):
+    - Spotify Playlists: 5,200 tracks
+    - Spotify charts: 12 tracks
+    - Apple playlists: 68 tracks
+- Based on this data, Spotify playlists appear to include a much broader range of tracks and have significantly higher numbers overall. However, looking at the charts (which typically represent current popularity), Spotify seems more selective with only about 12 tracks on average compared to Apple's playlist inclusion of about 68 tracks.
+
+
+#NOTE: MAKE A BAR GRAPH THAT COMPARES THIS 
+
+```
+
+```
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
