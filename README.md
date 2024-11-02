@@ -98,7 +98,7 @@ print(missing_values[missing_values > 0])
 - Distribution of artist_count
     - Most songs have a solo or duet
     - Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
-    - Collaborations with 3 artists are rare.
+    - Collaborations with three artists are rare.
 
 
 ![image](https://github.com/user-attachments/assets/6104e6c1-ca7a-4760-a52a-84259f2a39bb)
@@ -223,7 +223,9 @@ print(top_artists_by_tracks)
     - Valence and acousticness show a weak negative correlation (-0.082)
 ![image](https://github.com/user-attachments/assets/1be948d8-9de2-48fd-896d-a218ed54b29e)
 
-![image](https://github.com/user-attachments/assets/5bcce955-2511-473b-8176-1eb110cd6b52)
+![image](https://github.com/user-attachments/assets/f5f2d256-5723-4255-b930-a42620d0a33e)
+![image](https://github.com/user-attachments/assets/12051955-1613-4a3b-872b-1cc4581f16e1)
+
 
 ## Platform Popularity
 - Platform Reach (means):
