@@ -100,8 +100,7 @@ print(missing_values[missing_values > 0])
     - Notable outliers are songs that have a high number of collaborating artists (up to 8 artists)
     - Collaborations with three artists are rare.
 
-
-![image](https://github.com/user-attachments/assets/6104e6c1-ca7a-4760-a52a-84259f2a39bb)
+![image](https://github.com/user-attachments/assets/fa29c82a-d71c-456b-92d0-585f5c0eb4a1)
 
 - This is the piece of code that showed these graphs
 ```
@@ -173,8 +172,9 @@ print(top_artists_by_tracks)
 - Peak releases occur in Month 1 (January) and Month 5 (May), both with around 130-140 tracks
 - The lowest number of releases appears to be in Month 8 (August) with about 45 tracks
 - There seems to be a cyclical pattern with higher releases in the beginning and middle of the year
-![image](https://github.com/user-attachments/assets/362e9274-6247-4f15-a3ce-0ee23f9fbbe3)
-![image](https://github.com/user-attachments/assets/1a11e714-0128-478c-9e0e-4460f7d65d0e)
+![image](https://github.com/user-attachments/assets/c15b9743-aa83-4b31-bb71-77a62960e70b)
+![image](https://github.com/user-attachments/assets/becc45e4-87f6-43ec-bf3c-192cecab4918)
+
 - This is the piece of code that managed to produce these graphs
 ```
    def plot_temporal_trends(self, save_path: str = None):
@@ -226,7 +226,66 @@ print(top_artists_by_tracks)
 ![image](https://github.com/user-attachments/assets/f5f2d256-5723-4255-b930-a42620d0a33e)
 ![image](https://github.com/user-attachments/assets/12051955-1613-4a3b-872b-1cc4581f16e1)
 
+- This is the piece of code that produced these graphs
+```
+    
+    def plot_correlation_analysis(self):
+        """Plot correlation matrix and correlation analysis of musical features."""
+        # Define musical features to analyze
+        musical_features = [
+            'bpm', 'danceability_%', 'valence_%', 'energy_%',
+            'acousticness_%', 'instrumentalness_%', 'liveness_%', 'speechiness_%',
+            'streams_m'
+        ]
+        
+        # Calculate correlations
+        correlation_matrix = self.df[musical_features].corr()
+        
+        # 1. Plot correlation matrix heatmap
+        plt.figure(figsize=(12, 10))
+        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0, fmt='.3f')
+        plt.title('Correlation Matrix of Musical Features')
+        plt.tight_layout()
+        plt.show()
+        
+        # 2. Plot correlation bar chart
+        correlations = correlation_matrix['streams_m'].drop('streams_m')
+        
+        plt.figure(figsize=(12, 6))
+        correlations.plot(kind='bar')
+        plt.title('Correlation between Musical Attributes and Streams')
+        plt.xlabel('Musical Attributes')
+        plt.ylabel('Correlation Coefficient')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+        
+        # 3. Create scatter plots for key features
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+        features = ['bpm', 'acousticness_%', 'energy_%']
+        
+        for i, feature in enumerate(features):
+            axes[i].scatter(self.df[feature], self.df['streams_m'], alpha=0.5, color='pink')
+            axes[i].set_xlabel(feature)
+            axes[i].set_ylabel('Streams (Millions)')
+            axes[i].set_title(f'Streams vs {feature}')
+        
+        plt.tight_layout()
+        plt.show()
+        
+        return correlation_matrix
 
+# Example usage:
+    if __name__ == "__main__":
+        analyzer = SpotifyCorrelationAnalyzer('spotify-2023.csv')
+        correlations = analyzer.plot_correlation_analysis()
+        
+        # Print numerical correlation values
+        print("\nCorrelations with streams:")
+        stream_correlations = correlations['streams_m'].sort_values(ascending=False)
+        print(stream_correlations)
+
+```
 ## Platform Popularity
 - Platform Reach (means):
     - Spotify Playlists: 5,200 tracks
@@ -238,7 +297,8 @@ print(top_artists_by_tracks)
  
 - This is the piece of code that produced this graph
 ```
- def analyze_platforms(self):
+ 
+    def analyze_platforms(self):
         """Compare average presence across Spotify and Apple platforms."""
         # Calculate mean values for each platform
         platform_means = self.df[self.platform_cols].mean().round(2)
@@ -263,6 +323,18 @@ print(top_artists_by_tracks)
         
         plt.tight_layout()
         plt.show()
+        
+        # Calculate additional statistics for comparison
+        platform_stats = self.df[self.platform_cols].describe()
+        platform_stats.columns = ['Spotify Playlists', 'Spotify Charts', 'Apple Playlists']
+        
+        return platform_stats
+
+    if __name__ == "__main__":
+        analyzer = SpotifyAnalyzer('spotify-2023.csv')
+        stats = analyzer.analyze_platforms()
+        print("\nPlatform Statistics:")
+        print(stats)
 ```
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
