@@ -231,7 +231,8 @@ print(top_artists_by_tracks)
     - Spotify charts: 12 tracks
     - Apple playlists: 68 tracks
 - Based on this data, Spotify playlists appear to include a much broader range of tracks and have significantly higher numbers overall. However, looking at the charts (which typically represent current popularity), Spotify seems more selective with only about 12 tracks on average compared to Apple's playlist inclusion of about 68 tracks.
-![image](https://github.com/user-attachments/assets/94e3166c-665f-4fa4-a427-8c36d01f6cf0)
+![image](https://github.com/user-attachments/assets/1d78a7ff-654c-4e28-a0e9-fe2dbd22da91)
+
  
 - This is the piece of code that produced this graph
 ```
