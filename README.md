@@ -265,6 +265,24 @@ print(top_artists_by_tracks)
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
 - Added a code that will show me the data types of each column, number of rows and columns, missing values, and top 5 most streamed songs
-##### [v1.2.0] - 9/21/2024
 
--
+##### [v1.2.0] - 10/29/2024
+###### Changes:
+- improved the code for the overview of the dataset
+- Added a code for the distribution of released_year and artist_count
+
+##### [v1.3.0] - 10/30/2024
+###### Changes:
+- Added a code for the temporal trends and music characteristics correlation
+
+##### [v1.4.0] - 10/31/2024
+###### Changes:
+- Added a code to get the most popular platform
+
+##### [v1.5.0] - 11/1/2024
+###### Changes:
+- Improved all the codes by making it clean
+
+##### [v1.6.0] - 11/3/2024
+###### Changes:
+
