@@ -21,12 +21,9 @@ from typing import List, Tuple, Dict, Optional
 ```
 #### Exploring the Data
 - In the first part of this project is getting a dataset overview. So, I created a piece of code to help me check missing values and any abnormalities within the dataset.
-- After running the code, I then discovered that there were a few missing values within the 'shazam' column and 'key' column
-- This piece of code also returns basic descriptive statistics of the 'streams' column such as the mean, median (50th Percentile), and standard deviation.
+- Then I tried to clean the dataset of its abnormalities
+- Below is the piece of code that I used
 ```
-import pandas as pd
-import numpy as np
-
 # Read the dataset
 df = pd.read_csv('spotify-2023.csv')
 
@@ -53,17 +50,6 @@ df['streams'] = df['streams'].apply(clean_streams)
 print("\n=== Dataset Info After Cleaning ===")
 print(df.info())
 
-print("\n=== Missing Values ===")
-missing_values = df.isnull().sum()
-print(missing_values[missing_values > 0])
-
-print("\n=== Streams Statistics ===")
-print(df['streams'].describe())
-
-# Show top 5 most streamed songs
-print("\n=== Top 5 Most Streamed Songs ===")
-top_5_streams = df.nlargest(5, 'streams')[['track_name', 'artist(s)_name', 'streams']]
-print(top_5_streams)
 ```
 
 ## Overview of the Dataset
