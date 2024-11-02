@@ -69,7 +69,7 @@ print(top_5_streams)
 ## Overview of the Dataset
 - There are 953 rows and 24 columns
 - Below are the data types of each column
-- The missing values are were also indicated which can be read for the streams column, there is a 1 missing entry or rather an abnormal entry and for the shazam_charts column there are 50 missing values. 
+- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, and for the shazam_charts column, there are 50 missing values. 
 ![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
 ![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
 
@@ -231,12 +231,35 @@ print(top_artists_by_tracks)
     - Spotify charts: 12 tracks
     - Apple playlists: 68 tracks
 - Based on this data, Spotify playlists appear to include a much broader range of tracks and have significantly higher numbers overall. However, looking at the charts (which typically represent current popularity), Spotify seems more selective with only about 12 tracks on average compared to Apple's playlist inclusion of about 68 tracks.
-
-
-#NOTE: MAKE A BAR GRAPH THAT COMPARES THIS 
-
+![image](https://github.com/user-attachments/assets/94e3166c-665f-4fa4-a427-8c36d01f6cf0)
+ 
+- This is the piece of code that produced this graph
 ```
-
+ def analyze_platforms(self):
+        """Compare average presence across Spotify and Apple platforms."""
+        # Calculate mean values for each platform
+        platform_means = self.df[self.platform_cols].mean().round(2)
+        
+        # Create visualization
+        plt.figure(figsize=(10, 6))
+        
+        # Create bar plot
+        bars = plt.bar(range(len(platform_means)), platform_means.values)
+        plt.title('Average Track Presence Across Platforms')
+        plt.ylabel('Average Number of Appearances')
+        plt.xticks(range(len(platform_means)), 
+                  ['Spotify Playlists', 'Spotify Charts', 'Apple Playlists'],
+                  rotation=45)
+        
+        # Add value labels on top of each bar
+        for bar in bars:
+            height = bar.get_height()
+            plt.text(bar.get_x() + bar.get_width()/2., height,
+                    f'{height:,.0f}',
+                    ha='center', va='bottom')
+        
+        plt.tight_layout()
+        plt.show()
 ```
 #### Version History:
 ##### [v1.1.0] - 10/28/2024
