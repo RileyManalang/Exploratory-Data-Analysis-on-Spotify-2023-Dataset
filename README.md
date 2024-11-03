@@ -39,7 +39,7 @@ problematic_streams = df[~df['streams'].str.replace(',', '').str.match(r'^\d+$')
 print("\nRows with non-numeric streams values:")
 print(problematic_streams[['track_name', 'artist(s)_name', 'streams']])
 
-# clean the streams column properly
+# Clean the streams column properly
 def clean_streams(value):
     try:
         # Remove commas and convert to numeric
