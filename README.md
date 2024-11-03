@@ -361,6 +361,14 @@ print(top_artists_by_tracks)
 
 - This is the piece of code that produced these graphs
 ```
+   # For better documentation
+def analyze_spotify_patterns(df):
+    """
+    Analyzes Spotify 2023 data focusing on:
+    1. Stream patterns by key and mode
+    2. Artist and genre presence in playlists/charts
+    """
+    
     def preprocess_data(df):
         """Preprocess the dataframe to ensure correct data types"""
         # Convert streams and playlist/chart columns to numeric
@@ -538,6 +546,33 @@ print(top_artists_by_tracks)
     }
     
     return results
+
+# Example usage:
+if __name__ == "__main__":
+    # Read the dataset
+    df = pd.read_csv('spotify-2023.csv')
+    
+    # Print available columns (helpful for debugging)
+    print("Available columns:", df.columns.tolist())
+    
+    # Perform analysis
+    results = analyze_spotify_patterns(df)
+    
+    # Print key findings
+    print("\n=== KEY AND MODE STREAMING PATTERNS ===")
+    print("\nMode Statistics:")
+    print(results['key_mode_patterns']['mode_stats'])
+    print("\nMode T-Test Results:")
+    print(f"t-statistic: {results['key_mode_patterns']['mode_ttest'].statistic:.2f}")
+    print(f"p-value: {results['key_mode_patterns']['mode_ttest'].pvalue:.4f}")
+    
+    print("\n=== TOP ARTISTS BY PRESENCE ===")
+    print("\nTop 10 Artists by Overall Presence:")
+    print(results['presence_patterns']['artist_presence'].head(10)[['total_presence_score', 'streams']])
+    
+    # Display visualizations
+    results['key_mode_patterns']['visualization'].show()
+    results['presence_patterns']['visualization'].show()
 ```
 
 ## Insights and Recommendations
