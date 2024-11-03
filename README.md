@@ -321,6 +321,9 @@ print(top_artists_by_tracks)
         print("\nPlatform Statistics:")
         print(stats)
 ```
+
+## Advanced Analysis
+
 ### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
