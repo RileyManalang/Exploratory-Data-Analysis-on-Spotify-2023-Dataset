@@ -199,70 +199,95 @@ print(top_artists_by_tracks)
 - Correlation between danceability_% & energy_% and valence_% and acousticness_%
     - Danceability and Energy show a weak positive correlation (0.2)
     - Valence and acousticness show a weak negative correlation (-0.082)
-![image](https://github.com/user-attachments/assets/1be948d8-9de2-48fd-896d-a218ed54b29e)
-
-![image](https://github.com/user-attachments/assets/f5f2d256-5723-4255-b930-a42620d0a33e)
-![image](https://github.com/user-attachments/assets/12051955-1613-4a3b-872b-1cc4581f16e1)
+![image](https://github.com/user-attachments/assets/cc601fba-80da-4cb1-9849-9dc69b0faf3f)
+![image](https://github.com/user-attachments/assets/6415e139-3a87-4216-bfb7-cf308349caf2)
+![image](https://github.com/user-attachments/assets/e44178c5-2452-41f0-a26c-a42477d571ff)
 
 - This is the piece of code that produced these graphs
 ```
     
-    def plot_correlation_analysis(self):
-        """Plot correlation matrix and correlation analysis of musical features."""
-        # Define musical features to analyze
-        musical_features = [
-            'bpm', 'danceability_%', 'valence_%', 'energy_%',
-            'acousticness_%', 'instrumentalness_%', 'liveness_%', 'speechiness_%',
-            'streams_m'
-        ]
+# Make a correlation matrix heatmap
+    def plot_correlation_matrix(self):
+        """Create a correlation matrix heatmap of musical features."""
+        # Select the features in the exact order shown in the image
+        features = ['bpm', 'danceability_%', 'valence_%', 'energy_%', 'acousticness_%',
+                   'instrumentalness_%', 'liveness_%', 'speechiness_%']
         
-        # Calculate correlations
-        correlation_matrix = self.df[musical_features].corr()
+        # Calculate correlation matrix
+        corr_matrix = self.df[features].corr()
         
-        # 1. Plot correlation matrix heatmap
-        plt.figure(figsize=(12, 10))
-        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0, fmt='.3f')
+        # Create figure with specific size to match the reference
+        plt.figure(figsize=(10, 8))
+        
+        # Create heatmap without mask (to show full matrix)
+        sns.heatmap(corr_matrix,
+                   annot=True,
+                   fmt='.3g',  # Format to match the reference
+                   cmap='RdBu_r',
+                   center=0,
+                   vmin=-1,
+                   vmax=1,
+                   square=True,
+                   cbar_kws={'label': ''})  # Remove colorbar label
+        
         plt.title('Correlation Matrix of Musical Features')
+        
+        # Adjust layout to prevent cutoff
         plt.tight_layout()
         plt.show()
+
+# Plot correlation bar chart
+    def plot_stream_correlations(self):
+        """Create a bar plot of correlations between musical attributes and streams."""
+        features = ['bpm', 'danceability_%', 'valence_%', 'energy_%', 'acousticness_%',
+                   'instrumentalness_%', 'liveness_%', 'speechiness_%']
         
-        # 2. Plot correlation bar chart
-        correlations = correlation_matrix['streams_m'].drop('streams_m')
-        
-        plt.figure(figsize=(12, 6))
-        correlations.plot(kind='bar')
-        plt.title('Correlation between Musical Attributes and Streams')
-        plt.xlabel('Musical Attributes')
-        plt.ylabel('Correlation Coefficient')
+        plt.figure(figsize=(10, 6))
+        plt.bar(features, correlations, color='pink')
         plt.xticks(rotation=45)
+        plt.title('Correlation between Musical Attributes and Streams')
+        plt.ylabel('Correlation Coefficient')
+        plt.grid(axis='y', linestyle='--', alpha=0.7)
         plt.tight_layout()
         plt.show()
-        
-        # 3. Create scatter plots for key features
+
+    def plot_scatter_plots(self):
+        """Create scatter plots comparing streams with various musical attributes."""
         fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-        features = ['bpm', 'acousticness_%', 'energy_%']
         
-        for i, feature in enumerate(features):
-            axes[i].scatter(self.df[feature], self.df['streams_m'], alpha=0.5, color='pink')
-            axes[i].set_xlabel(feature)
-            axes[i].set_ylabel('Streams (Millions)')
-            axes[i].set_title(f'Streams vs {feature}')
+        # Plot 1: Streams vs BPM
+        axes[0].scatter(self.df['bpm'], self.df['streams_m'], 
+                       alpha=0.5, color='pink', s=20)
+        axes[0].set_xlabel('bpm')
+        axes[0].set_ylabel('Streams (Million)')
+        axes[0].set_title('Streams vs bpm')
+        
+        # Plot 2: Streams vs Acousticness
+        axes[1].scatter(self.df['acousticness_%'], self.df['streams_m'], 
+                       alpha=0.5, color='pink', s=20)
+        axes[1].set_xlabel('acousticness_%')
+        axes[1].set_ylabel('Streams (Million)')
+        axes[1].set_title('Streams vs acousticness %')
+        
+        # Plot 3: Streams vs Energy
+        axes[2].scatter(self.df['energy_%'], self.df['streams_m'], 
+                       alpha=0.5, color='pink', s=20)
+        axes[2].set_xlabel('energy_%')
+        axes[2].set_ylabel('Streams (Million)')
+        axes[2].set_title('Streams vs energy %')
         
         plt.tight_layout()
         plt.show()
-        
-        return correlation_matrix
 
-# Example usage:
+    # Example usage:
     if __name__ == "__main__":
-        analyzer = SpotifyCorrelationAnalyzer('spotify-2023.csv')
-        correlations = analyzer.plot_correlation_analysis()
+        # Initialize analyzer with your CSV file
+        analyzer = SpotifyAnalyzer('spotify-2023.csv')
         
-        # Print numerical correlation values
-        print("\nCorrelations with streams:")
-        stream_correlations = correlations['streams_m'].sort_values(ascending=False)
-        print(stream_correlations)
-
+        # Generate all visualizations
+        analyzer.plot_correlation_matrix()
+        analyzer.plot_stream_correlations()
+        analyzer.plot_scatter_plots()
 ```
 ## Platform Popularity
 - Platform Reach (means):
