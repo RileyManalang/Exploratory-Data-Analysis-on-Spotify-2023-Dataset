@@ -7,7 +7,7 @@ This is an exploratory data analysis project on Spotify's most streamed songs in
 - Statistical analysis of streaming patterns
 - Visualization of musical characteristics
 - Analysis of temporal trends
-- Platform comparison (Spotify vs. Apple Music playlists)
+- Platform comparison
 
 ## Libraries that were used
 ```
