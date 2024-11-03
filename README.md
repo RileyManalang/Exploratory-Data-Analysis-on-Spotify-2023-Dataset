@@ -21,22 +21,25 @@ from typing import Dict, Tuple
 # Specifically for the advanced analysis part
 from scipy import stats
 ```
-#### Exploring the Data
-- In the first part of this project is getting a dataset overview. So, I created a piece of code to help me check missing values and any abnormalities within the dataset.
-- Then I tried to clean the dataset of its abnormalities
-- Below is the piece of code that I used
-```
-# Read the dataset
-df = pd.read_csv('spotify-2023.csv')
 
-# Let's first look at problematic rows in the streams column
+## Overview of the Dataset
+- There are 953 rows and 24 columns
+- Below are the data types of each column
+- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, there are 50 missing values in the 'in_shazam_charts' column, and there are 95 missing values in the key column. 
+![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
+![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
+
+- This is the piece of code that produced these outputs
+```
+# Find the problematic rows in the streams column
 print("=== Problematic Values in Streams Column ===")
+
 # Print rows where streams contains non-numeric characters (after removing commas)
 problematic_streams = df[~df['streams'].str.replace(',', '').str.match(r'^\d+$')]
 print("\nRows with non-numeric streams values:")
 print(problematic_streams[['track_name', 'artist(s)_name', 'streams']])
 
-# Now let's clean the streams column properly
+# clean the streams column properly
 def clean_streams(value):
     try:
         # Remove commas and convert to numeric
@@ -52,24 +55,10 @@ df['streams'] = df['streams'].apply(clean_streams)
 print("\n=== Dataset Info After Cleaning ===")
 print(df.info())
 
-```
-
-## Overview of the Dataset
-- There are 953 rows and 24 columns
-- Below are the data types of each column
-- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, there are 50 missing values in the 'in_shazam_charts' column, and there are 95 missing values in the key column. 
-![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
-![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
-
-- This is the piece of code that produced these outputs
-```
-# Print basic info about the cleaned dataset
-print("\n=== Dataset Info After Cleaning ===")
-print(df.info())
-
 print("\n=== Missing Values ===")
 missing_values = df.isnull().sum()
 print(missing_values[missing_values > 0])
+
 
 ```
 ## Basic Descriptive Statistics
