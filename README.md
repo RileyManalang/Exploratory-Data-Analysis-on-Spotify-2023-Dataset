@@ -10,7 +10,6 @@ This is an exploratory data analysis project on Spotify's most streamed songs in
 - Platform comparison
 
 ## Libraries that were used
-- scipy was imported 
 ```
 import pandas as pd
 import numpy as np
