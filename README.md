@@ -550,6 +550,47 @@ print(top_artists_by_tracks)
     
     return results
 ```
+
+## Insights and Recommendations
+1. Temporal Strategy
+- Modern releases dominate streams, with a dramatic increase from 2015 onwards
+- Recommendation: Focus on current/recent releases for maximum streaming potential
+- Strategic timing: January and May show peak releases (130-140 tracks), while August has lowest releases (~45 tracks)
+- Recommendation: Consider releasing tracks in less saturated months to stand out, or align with peak months to ride the wave of heightened listener activity
+
+2. Artist Collaboration Patterns
+- Most successful tracks feature solo artists or duets
+- While collaborations with 3+ artists are rare, some outliers have up to 8 artists
+- Recommendation: Focus on solo or duet releases, but consider strategic high-profile collaborations for standout tracks
+
+3. Musical Characteristics
+- Surprising negative correlations with streams:
+    - Speechiness (-0.11) and danceability (-0.10) show strongest negative correlations
+    - Suggests over-optimization for these metrics might not help
+- Recommendation: Don't over-engineer tracks for specific musical metrics; focus on artistic quality over technical optimization
+- Major vs Minor mode impact is statistically insignificant (p-value = 0.1887)
+- Recommendation: Choose keys and modes based on artistic vision rather than perceived popularity advantage
+
+4. Platform Strategy
+- Platform presence varies significantly:
+    - Spotify Playlists: ~5,200 tracks average
+    - Apple Playlists: ~68 tracks average
+    - Spotify Charts: ~12 tracks average
+- Recommendation: 
+    - Focus on Spotify playlist inclusion as primary goal
+    - Build relationships with playlist curators
+    - Consider platform-specific optimization strategies
+
+5. Genre and Style Considerations
+- Cross-genre artists tend to perform well
+- Artists with broad mainstream appeal dominate streaming numbers
+- Recommendation:
+    - Consider genre-blending approaches
+    - Focus on universal appeal while maintaining artistic authenticity
+    - Build versatile musical portfolio
+
+- These insights suggest that while there's no single formula for streaming success, a strategic approach considering release timing, platform dynamics, and artistic positioning can significantly impact a track's performance. The key appears to be balancing artistic authenticity with strategic market awareness, rather than over-optimizing for any single metric or characteristic.
+
 ### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
