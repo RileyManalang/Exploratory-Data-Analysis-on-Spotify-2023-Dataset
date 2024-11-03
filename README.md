@@ -57,7 +57,7 @@ print(df.info())
 ## Overview of the Dataset
 - There are 953 rows and 24 columns
 - Below are the data types of each column
-- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, and for the shazam_charts column, there are 50 missing values. 
+- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, there are 50 missing values in the 'in_shazam_charts' column, and there are 95 missing values in the key column. 
 ![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
 ![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
 
