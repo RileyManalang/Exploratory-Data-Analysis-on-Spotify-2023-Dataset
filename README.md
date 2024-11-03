@@ -323,7 +323,230 @@ print(top_artists_by_tracks)
 ```
 
 ## Advanced Analysis
+#### Key and Mode Patterns:
+1. Mode Distribution:
+    - Major mode tracks (549 songs) slightly outnumber Minor mode tracks (403 songs)
+    - The average streams for Major mode (534.8M) is slightly higher than Minor mode (485.9M)
+    - However, the t-test results (p-value = 0.1887) indicate this difference is not statistically significant
+    - Looking at the violin plots in the bottom left, both modes show similar distribution shapes
+  
+2. Key Distribution:
+    - From the box plots in the top right, stream distributions across different keys are relatively consistent
+    - There's no clear key that dominates in terms of streaming performance
+    - All keys show similar median values with some outliers in the higher ranges
 
+#### Artist and Playlist Patterns:
+1. Playlist Presence Leaders:
+    - Pharrell Williams, Nile Rodgers, and Daft Punk have the highest playlist presence
+    - The Killers and a-ha follow closely
+    - These artists represent different eras and genres (disco/funk, rock, synthpop), suggesting playlist curators value variety
+   
+2. Chart Presence:
+    - Latin artists (Bad Bunny, Jung Kook) show strong chart presence
+    - The Weeknd appears multiple times in different collaborations
+    - This suggests contemporary pop and Latin music perform well on charts
+
+3. Overall Presence Score (combining playlist and chart metrics):
+    - Kendrick Lamar/Jay Rock lead overall presence
+    - Frank Ocean and Coldplay follow closely
+    - The top 10 includes a mix of genres: hip-hop, alternative, pop, and rock
+    - Artists with longevity (Coldplay, The Police) perform well on this metric
+
+4. Total Streams:
+    - The Weeknd, Taylor Swift, and Ed Sheeran dominate total streams
+    - These are all contemporary pop artists with broad appeal
+    - Interesting to note that high stream counts don't always correlate with high playlist presence
+
+#### Key Insights 
+- Musical mode (Major vs. Minor) has minimal impact on streaming performance
+- Playlist presence seems to favor legacy artists with established catalogs
+- Chart presence favors contemporary pop and Latin artists
+- The most successful artists tend to cross genre boundaries or have broad mainstream appeal
+- High playlist presence doesn't necessarily translate to highest streams, suggesting different paths to streaming success
+
+![image](https://github.com/user-attachments/assets/e7aa0751-40cc-4e30-ae94-3ef7d7ed1b6d)
+![image](https://github.com/user-attachments/assets/f64d78dc-3f35-469a-8c52-7d18f3374a98)
+
+- This is the piece of code that produced these graphs
+```
+    def preprocess_data(df):
+        """Preprocess the dataframe to ensure correct data types"""
+        # Convert streams and playlist/chart columns to numeric
+        df['streams'] = pd.to_numeric(df['streams'].astype(str).str.replace(',', ''), errors='coerce')
+        
+        playlist_chart_cols = [
+            'in_spotify_playlists', 'in_spotify_charts', 
+            'in_apple_playlists', 'in_apple_charts',
+            'in_deezer_playlists', 'in_deezer_charts'
+        ]
+        
+        for col in playlist_chart_cols:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+            
+        return df
+    
+    def analyze_key_mode_patterns():
+        """Analyze streaming patterns based on key and mode"""
+        # Streaming analysis by mode
+        mode_stats = df.groupby('mode').agg({
+            'streams': ['count', 'mean', 'median', 'std'],
+            'in_spotify_playlists': 'mean',
+            'in_spotify_charts': 'mean'
+        }).round(2)
+        
+        # Streaming analysis by key
+        key_stats = df.groupby('key').agg({
+            'streams': ['count', 'mean', 'median', 'std'],
+            'in_spotify_playlists': 'mean',
+            'in_spotify_charts': 'mean'
+        }).round(2)
+        
+        # Perform t-test between Major and Minor modes
+        major_streams = df[df['mode'] == 'Major']['streams'].dropna()
+        minor_streams = df[df['mode'] == 'Minor']['streams'].dropna()
+        mode_ttest = stats.ttest_ind(major_streams, minor_streams)
+        
+        # Create visualizations
+        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+        
+        # 1. Box plot of streams by mode
+        sns.boxplot(data=df, x='mode', y='streams', ax=axes[0, 0])
+        axes[0, 0].set_title('Distribution of Streams by Mode')
+        axes[0, 0].set_yscale('log')  # Use log scale for better visualization
+        
+        # 2. Box plot of streams by key
+        sns.boxplot(data=df, x='key', y='streams', ax=axes[0, 1])
+        axes[0, 1].set_title('Distribution of Streams by Key')
+        axes[0, 1].set_yscale('log')
+        axes[0, 1].tick_params(axis='x', rotation=45)
+        
+        # 3. Violin plot of streams by mode
+        sns.violinplot(data=df, x='mode', y='streams', ax=axes[1, 0])
+        axes[1, 0].set_title('Stream Distribution Shape by Mode')
+        axes[1, 0].set_yscale('log')
+        
+        # 4. Average streams by key and mode
+        avg_by_key_mode = df.pivot_table(
+            values='streams', 
+            index='key', 
+            columns='mode', 
+            aggfunc='mean'
+        ).fillna(0)
+        avg_by_key_mode.plot(kind='bar', ax=axes[1, 1])
+        axes[1, 1].set_title('Average Streams by Key and Mode')
+        axes[1, 1].tick_params(axis='x', rotation=45)
+        
+        plt.tight_layout()
+        
+        return {
+            'mode_stats': mode_stats,
+            'key_stats': key_stats,
+            'mode_ttest': mode_ttest,
+            'visualization': plt
+        }
+    
+    def analyze_artist_genre_presence():
+        """Analyze artist and genre presence in playlists and charts"""
+        # Calculate total playlist and chart presence for each artist
+        artist_presence = df.groupby('artist(s)_name').agg({
+            'streams': 'sum',
+            'in_spotify_playlists': 'mean',
+            'in_spotify_charts': 'mean',
+            'in_apple_playlists': 'mean',
+            'in_apple_charts': 'mean',
+            'in_deezer_playlists': 'mean',
+            'in_deezer_charts': 'mean'
+        }).round(2)
+        
+        # Calculate a presence score (weighted average of playlist and chart presence)
+        artist_presence['total_presence_score'] = (
+            artist_presence['in_spotify_playlists'] * 0.2 +
+            artist_presence['in_spotify_charts'] * 0.3 +
+            artist_presence['in_apple_playlists'] * 0.2 +
+            artist_presence['in_apple_charts'] * 0.2 +
+            artist_presence['in_deezer_playlists'] * 0.05 +
+            artist_presence['in_deezer_charts'] * 0.05
+        )
+        
+        # Analyze genre presence (using 'tracks_genre' column)
+        if 'tracks_genre' in df.columns:
+            genre_presence = df.groupby('tracks_genre').agg({
+                'streams': 'sum',
+                'in_spotify_playlists': 'mean',
+                'in_spotify_charts': 'mean',
+                'in_apple_playlists': 'mean',
+                'in_apple_charts': 'mean'
+            }).round(2)
+        else:
+            genre_presence = pd.DataFrame()  # Empty DataFrame if column doesn't exist
+        
+        # Create visualizations
+        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+        
+        # 1. Top 10 artists by playlist presence
+        top_10_playlist = artist_presence.nlargest(10, 'in_spotify_playlists')
+        top_10_playlist['in_spotify_playlists'].plot(
+            kind='barh', ax=axes[0, 0], title='Top 10 Artists by Spotify Playlist Presence'
+        )
+        axes[0, 0].invert_yaxis()  # Better visualization with artist names
+        
+        # 2. Top 10 artists by chart presence
+        top_10_charts = artist_presence.nlargest(10, 'in_spotify_charts')
+        top_10_charts['in_spotify_charts'].plot(
+            kind='barh', ax=axes[0, 1], title='Top 10 Artists by Spotify Chart Presence'
+        )
+        axes[0, 1].invert_yaxis()
+        
+        # 3 & 4. Genre plots (only if genre data exists)
+        if not genre_presence.empty:
+            # Top 10 genres by playlist presence
+            top_10_genre_playlist = genre_presence.nlargest(10, 'in_spotify_playlists')
+            top_10_genre_playlist['in_spotify_playlists'].plot(
+                kind='barh', ax=axes[1, 0], title='Top 10 Genres by Spotify Playlist Presence'
+            )
+            axes[1, 0].invert_yaxis()
+            
+            # Top 10 genres by chart presence
+            top_10_genre_charts = genre_presence.nlargest(10, 'in_spotify_charts')
+            top_10_genre_charts['in_spotify_charts'].plot(
+                kind='barh', ax=axes[1, 1], title='Top 10 Genres by Spotify Chart Presence'
+            )
+            axes[1, 1].invert_yaxis()
+        else:
+            # Alternative plots if genre data isn't available
+            # Top artists by total presence score
+            artist_presence.nlargest(10, 'total_presence_score')['total_presence_score'].plot(
+                kind='barh', ax=axes[1, 0], title='Top 10 Artists by Overall Presence Score'
+            )
+            axes[1, 0].invert_yaxis()
+            
+            # Top artists by streams
+            artist_presence.nlargest(10, 'streams')['streams'].plot(
+                kind='barh', ax=axes[1, 1], title='Top 10 Artists by Total Streams'
+            )
+            axes[1, 1].invert_yaxis()
+        
+        plt.tight_layout()
+        
+        return {
+            'artist_presence': artist_presence.sort_values('total_presence_score', ascending=False),
+            'genre_presence': genre_presence if not genre_presence.empty else None,
+            'top_artists_playlists': top_10_playlist,
+            'top_artists_charts': top_10_charts,
+            'visualization': plt
+        }
+    
+    # Preprocess the data
+    df = preprocess_data(df)
+    
+    # Perform analyses
+    results = {
+        'key_mode_patterns': analyze_key_mode_patterns(),
+        'presence_patterns': analyze_artist_genre_presence()
+    }
+    
+    return results
+```
 ### Version History:
 ##### [v1.1.0] - 10/28/2024
 ###### Changes:
