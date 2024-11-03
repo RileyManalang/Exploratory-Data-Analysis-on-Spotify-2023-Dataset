@@ -10,13 +10,17 @@ This is an exploratory data analysis project on Spotify's most streamed songs in
 - Platform comparison
 
 ## Libraries that were used
+- scipy was imported 
 ```
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from typing import List, Tuple, Dict, Optional
+from typing import Dict, Tuple 
 
+# For statistical functions and tests 
+# Specifically for the advanced analysis part
+from scipy import stats
 ```
 #### Exploring the Data
 - In the first part of this project is getting a dataset overview. So, I created a piece of code to help me check missing values and any abnormalities within the dataset.
