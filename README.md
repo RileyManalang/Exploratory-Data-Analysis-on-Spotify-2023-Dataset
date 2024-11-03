@@ -55,6 +55,7 @@ df['streams'] = df['streams'].apply(clean_streams)
 print("\n=== Dataset Info After Cleaning ===")
 print(df.info())
 
+# Print the missing values
 print("\n=== Missing Values ===")
 missing_values = df.isnull().sum()
 print(missing_values[missing_values > 0])
