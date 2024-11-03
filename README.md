@@ -604,4 +604,5 @@ print(top_artists_by_tracks)
 
 ##### [v1.6.0] - 11/3/2024
 ###### Changes:
-
+- Updated the readme file to make it simpler
+- Removed unneccesary pieces of code and information
