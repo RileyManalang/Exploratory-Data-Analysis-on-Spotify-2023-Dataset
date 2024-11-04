@@ -25,7 +25,8 @@ from scipy import stats
 ## Overview of the Dataset
 - There are 953 rows and 24 columns
 - Below are the data types of each column
-- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, there are 50 missing values in the 'in_shazam_charts' column, and there are 95 missing values in the key column. 
+- The missing values were also indicated, which can be read for the streams column; there is one missing entry or rather an abnormal entry, there are 50 missing values in the 'in_shazam_charts' column, and there are 95 missing values in the key column.
+
 ![image](https://github.com/user-attachments/assets/19687f59-f440-49cc-b8b2-b42a671e228a)
 ![image](https://github.com/user-attachments/assets/334f5fec-1388-4f7a-929c-1e1673247558)
 
@@ -119,9 +120,11 @@ plt.show()
 
 ## Top Performers
 - This snapshot shows the top 5 most streamed tracks
+  
 ![image](https://github.com/user-attachments/assets/de094956-5f69-4c8a-ae81-2cce68db1f49)
 
 - This is the top 5 most frequent artists based on the number of tracks in the dataset
+  
 ![image](https://github.com/user-attachments/assets/b93b4495-190f-486e-8104-32370ff1ab2e)
 
 - This is the piece of code that produced these outputs
@@ -150,6 +153,7 @@ print(top_artists_by_tracks)
 - Peak releases occur in Month 1 (January) and Month 5 (May), both with around 130-140 tracks
 - The lowest number of releases appears to be in Month 8 (August) with about 45 tracks
 - There seems to be a cyclical pattern with higher releases in the beginning and middle of the year
+  
 ![image](https://github.com/user-attachments/assets/c15b9743-aa83-4b31-bb71-77a62960e70b)
 ![image](https://github.com/user-attachments/assets/becc45e4-87f6-43ec-bf3c-192cecab4918)
 
