@@ -2,7 +2,7 @@
 ## 📋 Project Description
 This is an exploratory data analysis project on Spotify's most streamed songs in 2023 using Python. 
 
-## 🎯 Key Features
+## 🎯 Features
 - Comprehensive data cleaning and preprocessing
 - Statistical analysis of streaming patterns
 - Visualization of musical characteristics
@@ -604,14 +604,14 @@ if __name__ == "__main__":
 ## Insights and Recommendations
 1. Temporal Strategy
 - Modern releases dominate streams, with a dramatic increase from 2015 onwards
-- Recommendation: Focus on current/recent releases for maximum streaming potential
+    - Recommendation: Focus on current/recent releases for maximum streaming potential
 - Strategic timing: January and May show peak releases (130-140 tracks), while August has lowest releases (~45 tracks)
-- Recommendation: Consider releasing tracks in less saturated months to stand out, or align with peak months to ride the wave of heightened listener activity
+    - Recommendation: Consider releasing tracks in less saturated months to stand out or align with peak months to ride the wave of heightened listener activity
 
 2. Artist Collaboration Patterns
 - Most successful tracks feature solo artists or duets
 - While collaborations with 3+ artists are rare, some outliers have up to 8 artists
-- Recommendation: Focus on solo or duet releases, but consider strategic high-profile collaborations for standout tracks
+    - Recommendation: Focus on solo or duet releases, but consider strategic high-profile collaborations for standout tracks
 
 3. Platform Strategy
 - Platform presence varies significantly:
@@ -630,7 +630,13 @@ if __name__ == "__main__":
     - Consider genre-blending approaches
     - Focus on universal appeal while maintaining artistic authenticity
 
-- These insights suggest that while there's no single formula for streaming success, a strategic approach considering release timing, platform dynamics, and artistic positioning can significantly impact a track's performance. The key appears to be balancing artistic authenticity with strategic market awareness, rather than over-optimizing for any single metric or characteristic.
+- These insights suggest that while there's no single formula for streaming success, a strategic approach considering release timing, platform dynamics, and artistic positioning can significantly impact a track's performance. It seems that in order for a track to be successful, it must balance artistic authenticity with strategic market awareness rather than over-optimizing for any single metric or characteristic.
+
+### Challenges
+- The main challenge of this project is determining the appropriate data visualizations to gather useful data
+- Another challenge is the making of the graphs and learning new things such as new graphs and new libraries
+- Handling the dataset was also challenging since there was a lot of data and there were also missing values in the dataset
+- Organizing the way I gathered data was no easy task either since I didn't know where to start first and where to end
 
 ### Version History:
 ##### [v1.1.0] - 10/28/2024
